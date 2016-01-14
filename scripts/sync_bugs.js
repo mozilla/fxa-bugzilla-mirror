@@ -20,6 +20,8 @@ var BZ_VIEW_URL = 'https://bugzilla.mozilla.org/show_bug.cgi'
 var BZ_QUERIES = [
   // Everything in "Cloud Services/Server: Firefox Accounts".
   'product=Cloud%20Services&component=Server:%20Firefox%20Accounts',
+  // Anything with [fxa] in its whiteboard string.
+  'whiteboard=[fxa]',
   // Anything with [fxa-waffle] in its whiteboard string.
   'whiteboard=[fxa-waffle]'
 ]
@@ -52,9 +54,10 @@ module.exports = {
   findIssuesInBugzilla: function findIssuesInBugzilla() {
     var bugs = {}
     return P.each(BZ_QUERIES, function(query) {
-      // Fetch just the id and groups, which is enough information
-      // to tell if something might be security-sensitive.
-      var url = BZ_URL + '/bug?include_fields=id,groups'
+      // Fetch just enough fields to tell whether:
+      //  * the bug may security-sensitive
+      //  * the bug should be ignored
+      var url = BZ_URL + '/bug?include_fields=id,groups,whiteboard,url'
       url += '&status=' + BZ_STATUS_OPEN.join('&status=')
       if (process.env.BZ_API_KEY) {
         url += '&api_key=' + process.env.BZ_API_KEY
@@ -62,7 +65,13 @@ module.exports = {
       url += '&' + query
       return requestJSON(url).then(function (body) {
         body.bugs.forEach(function (bug) {
-          bugs[bug.id] = bug
+          if (bug.whiteboard && bug.whiteboard.indexOf('[fxa-waffle-ignore]') !== -1) {
+            console.log('Ignoring bz' + bug.id + ' due to [fxa-waffle-ignore]')
+          } else if (bug.url && bug.url.indexOf('github.com/mozilla') !== -1) {
+            console.log('Ignoring bz' + bug.id + ' due to linked github URL')
+          } else {
+            bugs[bug.id] = bug
+          }
         })
       })
     }).then(function () {
