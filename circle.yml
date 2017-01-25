@@ -10,4 +10,4 @@ machine:
 
 test:
   override:
-    - node ./scripts/sync_bugs.js
+    - GITHUB_USERNAME=$GITHUB_USERNAME GITHUB_API_KEY=$GITHUB_API_KEY node ./scripts/sync_bugs.js
