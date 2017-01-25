@@ -1,0 +1,13 @@
+dependencies:
+  pre:
+    # update locally with:
+    # openssl aes-256-cbc -e -in secret-env-plain -out secret-env-cipher -k $KEY
+    - openssl aes-256-cbc -d -in secret-env-cipher -k $KEY >> ~/.circlerc
+
+machine:
+  node:
+    version: 4
+
+test:
+  override:
+    - GITHUB_USERNAME=$GITHUB_USERNAME GITHUB_API_KEY=$GITHUB_API_KEY node ./scripts/sync_bugs.js

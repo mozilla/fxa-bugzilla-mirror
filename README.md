@@ -1,6 +1,8 @@
 
 # Firefox Accounts Bugzilla Mirror
 
+[![CircleCI](https://circleci.com/gh/mozilla/fxa-bugzilla-mirror.svg?style=svg)](https://circleci.com/gh/mozilla/fxa-bugzilla-mirror)
+
 This is a little experiment in mirroring FxA-related
 bugzilla bugs into github, so that we can view them
 in our github-based work planning flow at:
@@ -20,8 +22,8 @@ You have three options:
 * Manually create the issue in the fxa-bugzilla-mirror repo, and put "[bzXXXXXXX]" in the title.
 
 All such bugs will be dealth with by the bug-syncing script.
-One day it might even run automatically!
-For now, run it by hand:
+The script runs automatically for public bugs every day!
+You can also run it by hand:
 
     node ./scripts/sync_bugs.js
 
