@@ -9,9 +9,9 @@ jobs:
       - checkout
       - run:
           command: |
-            - npm install
-            - openssl aes-256-cbc -d -in secret-env-cipher -k $KEY >> ~/.circlerc
-            - GITHUB_USERNAME=$GITHUB_USERNAME GITHUB_API_KEY=$GITHUB_API_KEY node ./scripts/sync_bugs.js
+            npm install
+            openssl aes-256-cbc -d -in secret-env-cipher -k $KEY >> ~/.circlerc
+            GITHUB_USERNAME=$GITHUB_USERNAME GITHUB_API_KEY=$GITHUB_API_KEY node ./scripts/sync_bugs.js
 
 
 workflows:
