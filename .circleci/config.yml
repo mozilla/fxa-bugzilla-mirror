@@ -12,6 +12,7 @@ jobs:
             # https://www.openssl.org/docs/faq.html#USER3
             npm install
             openssl aes-256-cbc -md md5  -d -in secret-env-cipher -k $KEY >> ~/.circlerc
+            source ~/.circlerc
             GITHUB_USERNAME=$GITHUB_USERNAME GITHUB_API_KEY=$GITHUB_API_KEY node ./scripts/sync_bugs.js
 
 
