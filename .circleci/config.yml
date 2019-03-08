@@ -28,5 +28,8 @@ workflows:
   # see: https://circleci.com/docs/2.0/workflows/#git-tag-job-execution
 
   build-test-push:
+    triggers:
+      - schedule:
+        cron: "0 * * * *"
     jobs:
       - build
