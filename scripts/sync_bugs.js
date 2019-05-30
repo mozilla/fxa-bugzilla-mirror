@@ -14,7 +14,7 @@ var GH = require('./gh.js')
 var P = require('bluebird')
 var request = P.promisify(require('request'), { multiArgs: true })
 
-var REPO = 'fxa'
+var REPO = 'fxa-bugzilla-mirror'
 var BZ_URL = 'https://bugzilla.mozilla.org/rest'
 var BZ_VIEW_URL = 'https://bugzilla.mozilla.org/show_bug.cgi'
 var BZ_QUERIES = [
@@ -189,8 +189,7 @@ if (require.main == module) {
   var bzIssues, ghIssues
   // Find the sets of bugs in both places, to intersect them.
   module.exports.findIssuesInBugzilla().then(function (bugs) {
-    //bzIssues = bugs
-    bzIssues = [bugs[0]]
+    bzIssues = bugs
     return module.exports.findIssuesInGithub(gh)
   }).then(function (bugs) {
     ghIssues = bugs
