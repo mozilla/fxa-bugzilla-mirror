@@ -14,7 +14,7 @@ var GH = require('./gh.js')
 var P = require('bluebird')
 var request = P.promisify(require('request'), { multiArgs: true })
 
-var REPO = 'fxa-bugzilla-mirror'
+var REPO = 'fxa'
 var BZ_URL = 'https://bugzilla.mozilla.org/rest'
 var BZ_VIEW_URL = 'https://bugzilla.mozilla.org/show_bug.cgi'
 var BZ_QUERIES = [
