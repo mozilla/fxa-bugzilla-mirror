@@ -18,8 +18,6 @@ var REPO = 'fxa'
 var BZ_URL = 'https://bugzilla.mozilla.org/rest'
 var BZ_VIEW_URL = 'https://bugzilla.mozilla.org/show_bug.cgi'
 var BZ_QUERIES = [
-  // Everything in "Cloud Services/Server: Firefox Accounts".
-  'product=Cloud%20Services&component=Server:%20Firefox%20Accounts',
   // Anything with [fxa] in its whiteboard string.
   'whiteboard=[fxa]',
   // Anything with [fxa-waffle] in its whiteboard string.
