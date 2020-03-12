@@ -14,14 +14,10 @@ excited about it just yet...
 
 ## How do I get a bugzilla bug to show up in waffle?
 
-You have three options:
-
-* File it under product="Cloud Services" and component="Server: Firefox Accounts" in bugzilla;
-  we mirror all bugs in that component by default.
+* Add "[fxa]" to the bug's "whiteboard" field.
 * Add "[fxa-waffle]" to the bug's "whiteboard" field.
-* Manually create the issue in the fxa-bugzilla-mirror repo, and put "[bzXXXXXXX]" in the title.
 
-All such bugs will be dealth with by the bug-syncing script.
+All such bugs will be dealt with by the bug-syncing script.
 The script runs automatically for public bugs every day!
 You can also run it by hand:
 
